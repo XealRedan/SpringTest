@@ -1,7 +1,5 @@
 package test.spring.aop.expr;
 
-import com.sun.istack.internal.NotNull;
-
 /**
  * Created by alombard on 13/11/2015.
  */
@@ -10,7 +8,7 @@ public class Plus extends Expression {
     private Expression leftExpression;
     private Expression rightExpression;
 
-    public Plus(@NotNull Expression leftExpression, @NotNull Expression rightExpression) {
+    public Plus(Expression leftExpression, Expression rightExpression) {
         this.leftExpression = leftExpression;
         this.rightExpression = rightExpression;
     }
@@ -23,11 +21,11 @@ public class Plus extends Expression {
         return rightExpression;
     }
 
-    public void setLeftExpression(@NotNull Expression leftExpression) {
+    public void setLeftExpression(Expression leftExpression) {
         this.leftExpression = leftExpression;
     }
 
-    public void setRightExpression(@NotNull Expression rightExpression) {
+    public void setRightExpression(Expression rightExpression) {
         this.rightExpression = rightExpression;
     }
 

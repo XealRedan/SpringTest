@@ -23,7 +23,7 @@ public class CachingAspect {
 
     public static class CachableImpl implements Cachable {
         private int cache;
-        private boolean cacheValid;
+        private boolean cacheValid = false;
         private Expression ancestor;
 
         public int getCache() {
@@ -73,13 +73,15 @@ public class CachingAspect {
         ((Cachable)expr).invalidateCache();
     }
 
-    @Pointcut(value = "target(test.spring.aop.expr.Expression) && args(expr) && " +
+    @Pointcut(value = "target(test.spring.aop.expr.Expression) && " +
             "execution(* test.spring.aop.expr.Expression.eval())")
-    public void evaluation(Expression expr) {}
+    public void evaluation() {}
 
-    @Around("evaluation(expr)")
-    public int aroundEvaluation(ProceedingJoinPoint joinPoint, Expression expr) throws Throwable {
-        if(((Cachable)expr).isCacheValid()) {
+    @Around("evaluation()")
+    public int aroundEvaluation(ProceedingJoinPoint joinPoint) throws Throwable {
+        final Expression expr = (Expression)joinPoint.getThis();
+
+        if(!((Cachable)expr).isCacheValid()) {
             int result = (Integer) joinPoint.proceed();
             ((Cachable)expr).setCache(result);
             ((Cachable)expr).validateCache();
