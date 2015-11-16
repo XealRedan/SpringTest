@@ -6,9 +6,6 @@ import org.aspectj.lang.annotation.*;
 import test.spring.aop.expr.Expression;
 import test.spring.aop.expr.Plus;
 
-/**
- * Created by alombard on 13/11/2015.
- */
 @Aspect
 public class CachingAspect {
     public interface Cachable {
